@@ -1,13 +1,18 @@
 <script>
 	let path = '';
+	let slider = 1;
 	let min = -10;
 	let max = 10;
-	let slider = 1;
 	$: {
 		path = '';
 		for (let i = min; i <= max; i++) {
 			let x = i;
 			let y = x*x;
+
+			// scale
+			x = x*slider
+			y = y*slider
+
 			path += (i==min ? 'M' : 'L')+x+' '+(-y)+ ' ';
 		}
 		path += 'Z';
@@ -22,7 +27,7 @@
 	}
 </script>
 
-<input type="range" bind:value={slider} min="1" max="500">
+<input type="range" bind:value={slider} min="-100" max="100">
 
 <div class="graph-container">
 	<svg viewBox="{min} {min*max} {max*2} {max*max*2}" class="graph">
