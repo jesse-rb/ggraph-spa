@@ -1,3 +1,16 @@
+# Setup
+1. clonse repository
+2. `cd` to repository directory
+3. `npm run dev` to start svelte's development server
+4. `npm run build` to compile svelte minified without starting dev server 
+
+
+#
+#
+#
+# Svelte project initialization README below
+#
+#
 # Svelte + Vite
 
 This template should help get you started developing with Svelte in Vite.
