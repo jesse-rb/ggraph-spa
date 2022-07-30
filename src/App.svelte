@@ -1,22 +1,25 @@
 <script>
 	let path = '';
 	
-	let min = -10;
-	let max = 10;
+	let min = -20;
+	let max = 20;
 
-	let scale = 1;
+	let xScale = 0.5;
+	let yScale = 0.1;
+
 	let xOffset = 0;
 	let yOffset = 0;
 
 	$: {
 		path = '';
 		for (let i = min; i <= max; i++) {
+			// Setup initial x = y^2
 			let x = i;
 			let y = x*x;
 
-			// scale
-			x = x*scale;
-			y = y*scale;
+			// Scale
+			x = x*xScale;
+			y = y*yScale;
 
 			// Offset
 			x = x-(-1*xOffset);
@@ -36,8 +39,11 @@
 	}
 </script>
 
-<label for="scale">scale</label>
-<input id="scale" type="range" bind:value={scale} min={min} max={max}>
+<label for="xScale">xScale</label>
+<input id="xScale" type="range" bind:value={xScale} step="0.01" min={min} max={max}>
+
+<label for="yScale">yScale</label>
+<input id="yScale" type="range" bind:value={yScale} step="0.01" min={min} max={max}>
 
 <label for="xOffset">xOffset</label>
 <input id="xOffset" type="range" bind:value={xOffset} min={min} max={max}>
@@ -47,7 +53,9 @@
 
 <div class="graph-container">
 	<svg viewBox="{min} {min} {max*2} {max*2}" class="graph">
-		<path d={path} fill="green" />
+		<!--The plot-->
+		<path d={path} fill="green" stroke="white" stroke-width="0.2%" />
+		<circle cx={xOffset} cy={-yOffset} r="1%" fill="white" />
 		<!--center dot-->
 		<circle cx="0" cy="0" r="1%" fill="red" />
 		<!--ranges-->
@@ -71,5 +79,8 @@
 	}
 	.graph .small {
 		font-size: 0.5px;
+	}
+	.graph .small:hover {
+		font-size: 2px;
 	}
 </style>
